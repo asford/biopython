@@ -296,3 +296,15 @@ class DisorderedEntityWrapper(object):
     def disordered_get_list(self):
         "Return list of children."
         return self.child_dict.values()
+
+    def copy(self):
+        shallow = copy(self)
+
+        shallow.child_dict = {}
+        shallow.detach_parent()
+
+        for child in self.child_dict:
+            shallow.disordered_add(child.copy())
+
+        return shallow
+

@@ -103,8 +103,8 @@ class Residue(Entity):
         atom_list=self.get_list()
         undisordered_atom_list=[]
         for atom in atom_list:
-            if atom.is_disordered():
-                undisordered_atom_list=(undisordered_atom_list+ atom.disordered_get_list())
+            if atom.is_disordered() and isinstance(atom, DisorderedEntityWrapper):
+                undisordered_atom_list.extend(atom.disordered_get_list())
             else:
                 undisordered_atom_list.append(atom)
         return undisordered_atom_list       
